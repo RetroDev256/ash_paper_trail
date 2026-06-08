@@ -301,7 +301,8 @@ defmodule AshPaperTrailTest do
         Map.merge(@valid_attrs, %{
           "secret" => "This will be redacted",
           "req_arg" => "This is required",
-          "req_sensitive_arg" => "This is required and sensitive"
+          "req_sensitive_arg" => "This is required and sensitive",
+          "map_arg" => %{name: "thing", count: 3, type: "example"}
         })
 
       post = Posts.StoreInputsPost.create!(attrs, tenant: "acme")
@@ -318,7 +319,8 @@ defmodule AshPaperTrailTest do
                    secret: "REDACTED",
                    subject: "subject",
                    req_arg: "This is required",
-                   req_sensitive_arg: "REDACTED"
+                   req_sensitive_arg: "REDACTED",
+                   map_arg: %{name: "thing", count: 3, type: "example"}
                  } = action_inputs
              } = created_version
 
